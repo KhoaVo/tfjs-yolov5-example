@@ -22,9 +22,9 @@ Install packages with npm:
 ```
 npm install
 ```
-Link YOLOv5 weights directory into public directory:
+Copy the desired public/v* model into public/web_model:
 ```
-ln -s ../../yolov5/yolov5s_web_model public/web_model
+
 ```
 Run YOLOv5 detection web service with:
 ```
