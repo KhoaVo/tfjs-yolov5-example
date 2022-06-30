@@ -40,6 +40,9 @@ class App extends React.Component {
     const naturalWidth = image.naturalWidth;
     const naturalHeight = image.naturalHeight;
 
+    console.log('Dimensions are!!!');
+    console.log(naturalWidth, naturalHeight);
+
     // canvas.width = image.width;
     // canvas.height = image.height;
 
@@ -49,6 +52,9 @@ class App extends React.Component {
     const ratio = Math.min(canvas.width / image.naturalWidth, canvas.height / image.naturalHeight);
     const newWidth = Math.round(naturalWidth * ratio);
     const newHeight = Math.round(naturalHeight * ratio);
+
+    console.log('New dimensions are!!');
+    console.log(newWidth, newHeight);
     ctx.drawImage(
       image,
       0,
@@ -68,10 +74,14 @@ class App extends React.Component {
     const ctx = c.getContext("2d");
     this.cropToCanvas(e.target, c, ctx);
     let [modelWidth, modelHeight] = this.state.model.inputs[0].shape.slice(1, 3);
+    console.log('model widhts are');
+    console.log(modelWidth, modelHeight);
     const input = tf.tidy(() => {
-      return tf.image.resizeBilinear(tf.browser.fromPixels(c), [modelWidth, modelHeight])
+      return tf.image.resizeBilinear(tf.browser.fromPixels(c), [640, 640])
         .div(255.0).expandDims(0);
     });
+
+
     this.state.model.executeAsync(input).then(res => {
       // Font options.
       const font = "16px sans-serif";
